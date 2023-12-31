@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>signUp</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="signup-form">
+        <h1>SignUp</h1>
+        <form action="/" autocomplete="off">
+            <input type="email" id="email" placeholder="Your email address" name="email">
+            <input type="password" id="password" placeholder="***" name="password">
+            <button class="bt">SignUp</button>
+        </form>
+    </div>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', sans-serif;
+            background-color: aliceblue;
+        }
+
+        .signup-form {
+            margin: 50px auto;
+            width: 320px;
+            background-color: white;
+            padding: 20px;
+            border-radius: 11px;
+            text-align: center;
+        }
+
+        .signup-form input {
+            padding: 10px;
+            font-size: 17px;
+            margin-bottom: 15px;
+            border-radius: 9px;
+            border: 2px solid #e4f6ff;
+            width: 92%;
+        }
+
+        .signup-form .bt {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            font-size: 17px;
+            border: none;
+            border-radius: 11px;
+            background-color: #00BCD4;
+            color: white;
+        }
+
+
+
+
+
+    </style>
+
+    <script>
+        document.querySelector('.bt').onclick = async function (e) {
+            e.preventDefault()
+            let email = document.getElementById('email').value
+            let password = document.getElementById('password').value
+            let payload = JSON.stringify({
+                'email': email,
+                'password': password
+            })
+
+            let res = await fetch(
+                '/api/signup', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: payload
+                })
+
+            let result = await res.json()
+            console.log(result)
+        }
+    </script>
+</body>
+</html>
